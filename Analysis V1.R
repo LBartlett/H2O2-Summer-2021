@@ -12,22 +12,22 @@ library(emmeans)
 
 ## Read in Data Sets
 
-BMort <- read.csv(file = 'D:/Google Drive/PostDoc2/H202/REU/Drafting/Data/BMort.csv',
+BMort <- read.csv(file = 'BMort.csv',
                   header = TRUE)
 
-SMort <- read.csv(file = 'D:/Google Drive/PostDoc2/H202/REU/Drafting/Data/SMort.csv',
+SMort <- read.csv(file = 'SMort.csv',
                   header = TRUE)
 
-S50 <- read.csv(file = 'D:/Google Drive/PostDoc2/H202/REU/Drafting/Data/S50.csv',
+S50 <- read.csv(file = 'S50.csv',
                 header = TRUE)
 
-G50 <- read.csv(file = 'D:/Google Drive/PostDoc2/H202/REU/Drafting/Data/G50.csv',
+G50 <- read.csv(file = 'G50.csv',
                 header = TRUE)
 
-SLong <- read.csv(file = 'D:/Google Drive/PostDoc2/H202/REU/Drafting/Data/SLong.csv',
+SLong <- read.csv(file = 'SLong.csv',
                   header = TRUE)
 
-GLong <- read.csv(file = 'D:/Google Drive/PostDoc2/H202/REU/Drafting/Data/GLong.csv',
+GLong <- read.csv(file = 'GLong.csv',
                   header = TRUE)
 
 ###
@@ -161,6 +161,34 @@ for(OriginHive in unique(BMort$Colony)){
          y = BMort$PD[which(BMort$Colony == OriginHive & BMort$Starved == F)], 
          type = 'p', lwd = 2 ,
          col = cols[which(unique(BMort$Colony)==OriginHive)], 
+         pch = 20, cex=2.5)
+  
+}
+
+
+## Supplemental mortality
+
+par(mar = c(5,5,5,2))
+
+SMort$PD <- SMort$Died/SMort$Total
+
+cols <- c('pink3', 'orange1', 'lightblue')
+
+plot(x=log10(10^(((0:8)/2))), 
+     y = (0:8)*0.125, 
+     type='n', 
+     xlab = expression(paste('Dose (log'[10],'+1 H'[2],'O'[2],')',sep='')), 
+     ylab = 'Proportion Dead', 
+     main = 'Bee Mortality',
+     cex.main = 1.75, cex.lab = 1.635, cex.axis = 1.635)
+
+
+for(OriginHive in unique(SMort$Colony)){
+  
+  points(x = jitter(log10(SMort$Concentration[which(SMort$Colony == OriginHive)]+1), factor = 0.15), 
+         y = SMort$PD[which(SMort$Colony == OriginHive)], 
+         type = 'p', lwd = 2 ,
+         col = cols[which(unique(SMort$Colony)==OriginHive)], 
          pch = 20, cex=2.5)
   
 }
