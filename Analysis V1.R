@@ -306,10 +306,17 @@ abline(a = 0, b = 0, lty = 2)
 
 
 
+# Review Recommendation (constructive, appreciated)
+# Check if consumption in no-choice is determined by concentrations
+# Only really meaningful with the SMort data where mortality didn't change across concentrations
 
+plot(SMort$Consumed[which(!SMort$Starved)]~log(SMort$Concentration[which(!SMort$Starved)]+1))
 
+#think it's obvious but check anyway
 
+hist(SMort$Consumed[which(!SMort$Starved)])
 
+#declining ti pursue any stats as it's an odd measure (not ad libitum)
 
 
 
